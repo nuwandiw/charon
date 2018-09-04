@@ -69,9 +69,19 @@ public interface ResourceManager {
      * @param excludeAttributes
      * @return
      */
-    public SCIMResponse listWithGET(UserManager userManager, String filter,
+    default SCIMResponse listWithGET(UserManager userManager, String filter,
                                     int startIndex, int count, String sortBy, String sortOrder, String domainName,
-                                    String attributes, String excludeAttributes);
+                                    String attributes, String excludeAttributes) {
+        return null;
+    }
+
+    @Deprecated
+    default SCIMResponse listWithGET(UserManager userManager, String filter,
+                                    int startIndex, int count, String sortBy, String sortOrder, String attributes,
+                                    String excludeAttributes) {
+        return listWithGET(userManager, filter, startIndex, count, sortBy, sortOrder, null, attributes,
+                excludeAttributes);
+    }
 
     /*
      * query resources
